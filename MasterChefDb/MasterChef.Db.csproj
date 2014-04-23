@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mappings\BaseMapping.cs" />
     <Compile Include="Mappings\ChefMappings.cs" />
     <Compile Include="Mappings\ConcurentMapping.cs" />
     <Compile Include="Mappings\ConcursMapping.cs" />

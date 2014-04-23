@@ -1,7 +1,7 @@
 ﻿using MasterChefDb.Models;
 using System.Data.Entity.ModelConfiguration;
 
-namespace MasterChefDb
+namespace MasterChefDb.Mappings
 {
     public class ChefMappings : EntityTypeConfiguration<Chef>
     {

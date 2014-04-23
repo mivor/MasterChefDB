@@ -43,7 +43,7 @@ namespace MasterChef.App
                 var jurat_4 = new Jurat { Name = "Evil", Nivel = 6 };
                 var jurat_3 = new Jurat { Name = "judge", Nivel = 2 };
 
-                var echipaB = context.Echipe.Single(e => e.Nume == "Loosers");
+                var echipaB = context.Echipe.Single(e => e.Name == "Loosers");
                 var chef_loose = new Chef { Name = "Rookie", Stele = 1, Specializare = "iarut" };
                 echipaB.AddChef(chef_loose);
                 echipaB.AddConcurent(new Concurent {Name = "Bob"});
@@ -60,7 +60,7 @@ namespace MasterChef.App
             using (var context = new MasterChefDataContext())
             {
                 var evilJudge = context.Persoane.OfType<Jurat>().Single( j => j.Name == "Evil");
-                var echipaB = context.Echipe.Single(e => e.Nume == "Loosers");
+                var echipaB = context.Echipe.Single(e => e.Name == "Loosers");
                 echipaB.AddEvaluare(evilJudge, 0);
 
                 context.SaveChanges();

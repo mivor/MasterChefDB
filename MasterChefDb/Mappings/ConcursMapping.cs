@@ -1,7 +1,7 @@
 ﻿using MasterChef.Models;
 using System.Data.Entity.ModelConfiguration;
 
-namespace MasterChefDb
+namespace MasterChefDb.Mappings
 {
     public class ConcursMapping : EntityTypeConfiguration<Concurs>
     {

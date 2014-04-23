@@ -5,7 +5,6 @@ namespace MasterChefDb.Models
 {
     public class Echipa : BaseModel
     {
-        public string Nume { get; set; }
         public virtual ICollection<Concurent> Concurenti { get; private set; }
         public virtual ICollection<Evaluare> Evaluari { get; private set; }
         
@@ -25,7 +24,7 @@ namespace MasterChefDb.Models
 
         public Echipa(string nume) : this()
         {
-            Nume = nume;
+            Name = nume;
         }
 
         public void AddConcurent(Concurent concurent)

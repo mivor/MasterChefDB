@@ -1,4 +1,5 @@
-﻿using MasterChefDb.Models;
+﻿using MasterChefDb.Mappings;
+using MasterChefDb.Models;
 using System.Data.Entity;
 
 namespace MasterChefDb
@@ -17,6 +18,8 @@ namespace MasterChefDb
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Configurations.Add(new PersoaneMapping());
+            modelBuilder.Configurations.Add(new BaseMapping());
+
             modelBuilder.Configurations.Add(new ConcurentMapping());
             modelBuilder.Configurations.Add(new ChefMappings());
             modelBuilder.Configurations.Add(new ConcursMapping());
