@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{313C6680-67A9-476A-83D8-95E1E2C4569A}</ProjectGuid>
+    <ProjectGuid>{00DD2825-E6A8-4C14-A212-39FBC99273F5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MasterChefDb</RootNamespace>
-    <AssemblyName>MasterChefDb</AssemblyName>
+    <RootNamespace>MasterChef.DAL</RootNamespace>
+    <AssemblyName>MasterChef.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,16 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,34 +39,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mappings\BaseMapping.cs" />
-    <Compile Include="Mappings\ChefMappings.cs" />
-    <Compile Include="Mappings\ConcurentMapping.cs" />
-    <Compile Include="Mappings\ConcursMapping.cs" />
-    <Compile Include="Mappings\PersoaneMapping.cs" />
-    <Compile Include="MasterChefDataContext.cs" />
-    <Compile Include="MasterChefInitializer.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\ChefModel.cs" />
-    <Compile Include="Models\ConcurentModel.cs" />
-    <Compile Include="Models\ConcursModel.cs" />
-    <Compile Include="Models\EchipaModel.cs" />
-    <Compile Include="Models\EvaluareModel.cs" />
-    <Compile Include="Models\JuratModel.cs" />
-    <Compile Include="Models\PersoanaModel.cs" />
+    <Compile Include="Concrete\DataMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
+    <Folder Include="Abstract\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MasterChef.Business\MasterChef.Business.csproj">
       <Project>{deee89ae-ef9c-41b1-916c-ebcd62c39abf}</Project>
       <Name>MasterChef.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MasterChefDb\MasterChef.Db.csproj">
+      <Project>{313c6680-67a9-476a-83d8-95e1e2c4569a}</Project>
+      <Name>MasterChef.Db</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

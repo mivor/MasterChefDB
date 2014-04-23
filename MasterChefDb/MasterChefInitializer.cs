@@ -7,7 +7,7 @@ namespace MasterChefDb
     {
         protected override void Seed(MasterChefDataContext context)
         {
-            context.Persoane.Add(new Concurent { Name = "Jhon" });
+            context.Persoane.Add(new ConcurentModel { Name = "Jhon" });
         }
     }
 }

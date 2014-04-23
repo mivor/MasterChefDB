@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MasterChefDb.Mappings
 {
-    public class BaseMapping : EntityTypeConfiguration<Persoana>
+    public class BaseMapping : EntityTypeConfiguration<PersoanaModel>
     {
         public BaseMapping()
         {

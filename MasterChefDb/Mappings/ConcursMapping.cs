@@ -1,9 +1,9 @@
-﻿using MasterChef.Models;
+﻿using MasterChefDb.Models;
 using System.Data.Entity.ModelConfiguration;
 
 namespace MasterChefDb.Mappings
 {
-    public class ConcursMapping : EntityTypeConfiguration<Concurs>
+    public class ConcursMapping : EntityTypeConfiguration<ConcursModel>
     {
         public ConcursMapping()
         {

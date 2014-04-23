@@ -13,67 +13,67 @@ namespace MasterChef.App
     {
         static void Main(string[] args)
         {
-            using (var context = new MasterChefDataContext())
-            {
-                //Database.SetInitializer(new MasterChefInitializer());
+            //using (var context = new MasterChefDataContext())
+            //{
+            //    //Database.SetInitializer(new MasterChefInitializer());
 
-                var chef_A = new Chef { Name = "Ramsy", Specializare = "Marine", Stele = 5 };
-                var persoane = context.Persoane.ToList();
-                context.Persoane.Add(chef_A);
-                //context.SaveChanges();
-                var echipa_A = new Echipa("Hey!");
-                echipa_A.AddChef(chef_A);
-                echipa_A.AddConcurent(new Concurent { Name = "Jhon" });
-                echipa_A.AddConcurent(new Concurent { Name = "Maria" });
-                echipa_A.AddConcurent(new Concurent { Name = "Lyv" });
+            //    var chef_A = new ChefModel { Name = "Ramsy", Specializare = "Marine", Stele = 5 };
+            //    var persoane = context.Persoane.ToList();
+            //    context.Persoane.Add(chef_A);
+            //    //context.SaveChanges();
+            //    var echipa_A = new EchipaModel("Hey!");
+            //    echipa_A.AddChef(chef_A);
+            //    echipa_A.AddConcurent(new ConcurentModel { Name = "Jhon" });
+            //    echipa_A.AddConcurent(new ConcurentModel { Name = "Maria" });
+            //    echipa_A.AddConcurent(new ConcurentModel { Name = "Lyv" });
 
-                var echipa_B = new Echipa("Loosers");
+            //    var echipa_B = new EchipaModel("Loosers");
 
-                var jurat_1 = new Jurat { Name = "Bors", Nivel = 3 };
+            //    var jurat_1 = new JuratModel { Name = "Bors", Nivel = 3 };
 
-                context.Echipe.AddRange(new[] { echipa_A, echipa_B });
-                context.Persoane.Add(jurat_1);
+            //    context.Echipe.AddRange(new[] { echipa_A, echipa_B });
+            //    context.Persoane.Add(jurat_1);
 
-                context.SaveChanges();
-            }
+            //    context.SaveChanges();
+            //}
 
-            using (var context = new MasterChefDataContext())
-            {
-                var jurat_2 = new Jurat { Name = "Bors", Nivel = 3 };
-                var jurat_4 = new Jurat { Name = "Evil", Nivel = 6 };
-                var jurat_3 = new Jurat { Name = "judge", Nivel = 2 };
+            //using (var context = new MasterChefDataContext())
+            //{
+            //    var jurat_2 = new JuratModel { Name = "Bors", Nivel = 3 };
+            //    var jurat_4 = new JuratModel { Name = "Evil", Nivel = 6 };
+            //    var jurat_3 = new JuratModel { Name = "judge", Nivel = 2 };
 
-                var echipaB = context.Echipe.Single(e => e.Name == "Loosers");
-                var chef_loose = new Chef { Name = "Rookie", Stele = 1, Specializare = "iarut" };
-                echipaB.AddChef(chef_loose);
-                echipaB.AddConcurent(new Concurent {Name = "Bob"});
-                echipaB.AddConcurent(new Concurent {Name = "AAA"});
-                echipaB.AddConcurent(new Concurent {Name = "CCC"});
-                echipaB.AddConcurent(new Concurent {Name = "X"});
-                echipaB.AddConcurent(new Concurent { Name = "Y" });
+            //    var echipaB = context.Echipe.Single(e => e.Name == "Loosers");
+            //    var chef_loose = new ChefModel { Name = "Rookie", Stele = 1, Specializare = "iarut" };
+            //    echipaB.AddChef(chef_loose);
+            //    echipaB.AddConcurent(new ConcurentModel {Name = "Bob"});
+            //    echipaB.AddConcurent(new ConcurentModel {Name = "AAA"});
+            //    echipaB.AddConcurent(new ConcurentModel {Name = "CCC"});
+            //    echipaB.AddConcurent(new ConcurentModel {Name = "X"});
+            //    echipaB.AddConcurent(new ConcurentModel { Name = "Y" });
 
-                context.Persoane.AddRange(new[] { jurat_2, jurat_3, jurat_4 });
+            //    context.Persoane.AddRange(new[] { jurat_2, jurat_3, jurat_4 });
 
-                context.SaveChanges();
-            }
+            //    context.SaveChanges();
+            //}
 
-            using (var context = new MasterChefDataContext())
-            {
-                var evilJudge = context.Persoane.OfType<Jurat>().Single( j => j.Name == "Evil");
-                var echipaB = context.Echipe.Single(e => e.Name == "Loosers");
-                echipaB.AddEvaluare(evilJudge, 0);
+            //using (var context = new MasterChefDataContext())
+            //{
+            //    var evilJudge = context.Persoane.OfType<JuratModel>().Single( j => j.Name == "Evil");
+            //    var echipaB = context.Echipe.Single(e => e.Name == "Loosers");
+            //    echipaB.AddEvaluare(evilJudge, 0);
 
-                context.SaveChanges();
+            //    context.SaveChanges();
 
-                foreach (var judge in context.Persoane.OfType<Jurat>())
-                {
-                    foreach (var echipa in context.Echipe)
-                    {
-                        judge.Evalueaza(echipa);
-                    }
-                }
-                context.SaveChanges();
-            }
+            //    foreach (var judge in context.Persoane.OfType<JuratModel>())
+            //    {
+            //        foreach (var echipa in context.Echipe)
+            //        {
+            //            judge.Evalueaza(echipa);
+            //        }
+            //    }
+            //    context.SaveChanges();
+            //}
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿
 namespace MasterChefDb.Models
 {
-    public class Chef : Persoana
+    public class ChefModel : PersoanaModel
     {
-        public virtual Echipa Echipa { get; set; }
+        public virtual EchipaModel Echipa { get; set; }
         public string Specializare { get; set; }
         public int Stele { get; set; }
     }

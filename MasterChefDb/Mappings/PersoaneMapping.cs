@@ -3,7 +3,7 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace MasterChefDb.Mappings
 {
-    public class PersoaneMapping : EntityTypeConfiguration<Persoana>
+    public class PersoaneMapping : EntityTypeConfiguration<PersoanaModel>
     {
         public PersoaneMapping()
         {

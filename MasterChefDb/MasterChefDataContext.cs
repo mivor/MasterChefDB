@@ -6,8 +6,8 @@ namespace MasterChefDb
 {
     public class MasterChefDataContext : DbContext
     {
-        public DbSet<Persoana> Persoane { get; set; }
-        public DbSet<Echipa> Echipe { get; set; }
+        public DbSet<PersoanaModel> Persoane { get; set; }
+        public DbSet<EchipaModel> Echipe { get; set; }
 
         public MasterChefDataContext()
             : base("MasterChefDatabaseConnection")
@@ -25,9 +25,9 @@ namespace MasterChefDb
             modelBuilder.Configurations.Add(new ConcursMapping());
 
 
-            modelBuilder.Entity<Echipa>().ToTable("Echipe");
-            modelBuilder.Entity<Jurat>().ToTable("Jurati");
-            modelBuilder.Entity<Evaluare>().ToTable("Evaluari");
+            modelBuilder.Entity<EchipaModel>().ToTable("Echipe");
+            modelBuilder.Entity<JuratModel>().ToTable("Jurati");
+            modelBuilder.Entity<EvaluareModel>().ToTable("Evaluari");
         }
     }
 }

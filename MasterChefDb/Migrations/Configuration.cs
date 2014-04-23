@@ -15,7 +15,7 @@ namespace MasterChefDb.Migrations
 
         protected override void Seed(MasterChefDb.MasterChefDataContext context)
         {
-            context.Persoane.Add(new Concurent { Name = "JAAAAhon" });
+            context.Persoane.Add(new ConcurentModel { Name = "JAAAAhon" });
         }
     }
 }

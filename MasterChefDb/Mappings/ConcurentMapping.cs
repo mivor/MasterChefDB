@@ -3,7 +3,7 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace MasterChefDb.Mappings
 {
-    public class ConcurentMapping : EntityTypeConfiguration<Concurent>
+    public class ConcurentMapping : EntityTypeConfiguration<ConcurentModel>
     {
         public ConcurentMapping()
         {
