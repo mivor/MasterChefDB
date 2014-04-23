@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterChefDb", "MasterChefDb\MasterChefDb.csproj", "{313C6680-67A9-476A-83D8-95E1E2C4569A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterChef.Db", "MasterChefDb\MasterChef.Db.csproj", "{313C6680-67A9-476A-83D8-95E1E2C4569A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterChef.App", "MasterChef.Console\MasterChef.App.csproj", "{36AD3B91-A870-4519-ABDC-55FEE1EBB166}"
 EndProject

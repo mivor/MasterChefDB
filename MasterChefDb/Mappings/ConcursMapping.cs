@@ -1,4 +1,4 @@
-﻿using MasterChef;
+﻿using MasterChef.Models;
 using System.Data.Entity.ModelConfiguration;
 
 namespace MasterChefDb

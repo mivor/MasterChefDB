@@ -64,9 +64,9 @@
       <Project>{deee89ae-ef9c-41b1-916c-ebcd62c39abf}</Project>
       <Name>MasterChef.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MasterChefDb\MasterChefDb.csproj">
+    <ProjectReference Include="..\MasterChefDb\MasterChef.Db.csproj">
       <Project>{313c6680-67a9-476a-83d8-95e1e2c4569a}</Project>
-      <Name>MasterChefDb</Name>
+      <Name>MasterChef.Db</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

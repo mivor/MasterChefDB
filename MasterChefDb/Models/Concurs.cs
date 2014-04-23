@@ -1,8 +1,8 @@
-﻿using MasterChefDb.Business.Models;
+﻿using MasterChefDb.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace MasterChef.Business.Models
+namespace MasterChef.Models
 {
     public class Concurs : BaseModel
     {

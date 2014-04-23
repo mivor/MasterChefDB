@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace MasterChefDb.Business.Models
+namespace MasterChefDb.Models
 {
     public class Echipa : BaseModel
     {

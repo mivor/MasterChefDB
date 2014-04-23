@@ -55,6 +55,14 @@
     <Compile Include="MasterChefDataContext.cs" />
     <Compile Include="MasterChefInitializer.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\Chef.cs" />
+    <Compile Include="Models\Concurent.cs" />
+    <Compile Include="Models\Concurs.cs" />
+    <Compile Include="Models\Echipa.cs" />
+    <Compile Include="Models\Evaluare.cs" />
+    <Compile Include="Models\Jurat.cs" />
+    <Compile Include="Models\Persoana.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

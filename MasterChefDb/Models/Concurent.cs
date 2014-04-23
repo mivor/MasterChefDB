@@ -1,5 +1,5 @@
 ﻿
-namespace MasterChefDb.Business.Models
+namespace MasterChefDb.Models
 {
     public class Concurent : Persoana
     {

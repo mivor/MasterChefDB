@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using MasterChefDb.Models;
+using System.Data.Entity;
 
 namespace MasterChefDb
 {
