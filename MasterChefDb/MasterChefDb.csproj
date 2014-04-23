@@ -54,13 +54,6 @@
     <Compile Include="MasterChefDataContext.cs" />
     <Compile Include="MasterChefInitializer.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\Chef.cs" />
-    <Compile Include="Models\Concurent.cs" />
-    <Compile Include="Models\Echipa.cs" />
-    <Compile Include="Models\Evaluare.cs" />
-    <Compile Include="Models\Jurat.cs" />
-    <Compile Include="Models\Persoana.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +61,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MasterChef.Business\MasterChef.Business.csproj">
+      <Project>{deee89ae-ef9c-41b1-916c-ebcd62c39abf}</Project>
+      <Name>MasterChef.Business</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

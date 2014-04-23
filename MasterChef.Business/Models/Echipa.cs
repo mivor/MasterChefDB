@@ -8,7 +8,6 @@ namespace MasterChefDb
 {
     public class Echipa : BaseModel
     {
-        //public int? ChefId { get; set; }
         public string Nume { get; set; }
         public Chef Chef
         {
@@ -16,7 +15,6 @@ namespace MasterChefDb
             {
                 return Concurenti.OfType<Chef>().SingleOrDefault();
             }
-            //get;
             private set{}
         }
  
