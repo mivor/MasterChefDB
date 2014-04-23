@@ -14,13 +14,14 @@ namespace MasterChef.App
         {
             using (var context = new MasterChefDataContext())
             {
-                Database.SetInitializer(new MasterChefInitializer());
+                //Database.SetInitializer(new MasterChefInitializer());
 
                 var chef_A = new Chef { Name = "Ramsy", Specializare = "Marine", Stele = 5 };
+                var persoane = context.Persoane.ToList();
                 context.Persoane.Add(chef_A);
-                context.SaveChanges();
+                //context.SaveChanges();
                 var echipa_A = new Echipa("Hey!");
-                echipa_A.AddConcurent(chef_A);
+                echipa_A.AddChef(chef_A);
                 echipa_A.AddConcurent(new Concurent { Name = "Jhon" });
                 echipa_A.AddConcurent(new Concurent { Name = "Maria" });
                 echipa_A.AddConcurent(new Concurent { Name = "Lyv" });
@@ -43,7 +44,7 @@ namespace MasterChef.App
 
                 var echipaB = context.Echipe.Single(e => e.Nume == "Loosers");
                 var chef_loose = new Chef { Name = "Rookie", Stele = 1, Specializare = "iarut" };
-                echipaB.AddConcurent(chef_loose);
+                echipaB.AddChef(chef_loose);
                 echipaB.AddConcurent(new Concurent {Name = "Bob"});
                 echipaB.AddConcurent(new Concurent {Name = "AAA"});
                 echipaB.AddConcurent(new Concurent {Name = "CCC"});

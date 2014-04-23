@@ -17,16 +17,12 @@ namespace MasterChefDb
             base.OnModelCreating(modelBuilder);
             modelBuilder.Configurations.Add(new PersoaneMapping());
             modelBuilder.Configurations.Add(new ConcurentMapping());
-            //modelBuilder.Configurations.Add(new EchipaMapping());
+            modelBuilder.Configurations.Add(new ChefMappings());
 
             modelBuilder.Entity<Echipa>().ToTable("Echipe");
             modelBuilder.Entity<Concurent>().ToTable("Concurenti");
-            modelBuilder.Entity<Chef>().ToTable("Chefs");
             modelBuilder.Entity<Jurat>().ToTable("Jurati");
             modelBuilder.Entity<Evaluare>().ToTable("Evaluari");
-
-            //modelBuilder.Entity<Echipa>().HasOptional(X => X.Chef).WithOptionalDependent(x => x.Echipa);
-
         }
     }
 }

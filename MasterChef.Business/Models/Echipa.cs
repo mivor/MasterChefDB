@@ -35,11 +35,13 @@ namespace MasterChefDb
         public void AddConcurent(Concurent concurent)
         {
             concurent.Echipa = this;
-            if (concurent is Chef && this.Chef == null)
-                Chef = (Chef)concurent;
-            //Concurenti.Add(concurent);
-            else
-                Concurenti.Add(concurent);
+            Concurenti.Add(concurent);
+        }
+
+        public void AddChef(Chef chef)
+        {
+            chef.Echipa = this;
+            Chef = chef;
         }
 
         public void AddEvaluare(Jurat jurat, decimal nota)

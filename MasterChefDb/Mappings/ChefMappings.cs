@@ -1,12 +1,13 @@
 ﻿using System.Data.Entity.ModelConfiguration;
 
-namespace MasterChefDb.Mappings
+namespace MasterChefDb
 {
     public class ChefMappings : EntityTypeConfiguration<Chef>
     {
         public ChefMappings()
         {
-            HasOptional(x => x.Echipa).WithRequired(x => x.Chef);
+            ToTable("Chefs");
+            HasOptional(x => x.Echipa).WithOptionalPrincipal(x => x.Chef).WillCascadeOnDelete(false);
         }
     }
 }

@@ -42,6 +42,7 @@
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Chef.cs" />
     <Compile Include="Models\Concurent.cs" />
+    <Compile Include="Models\Concurs.cs" />
     <Compile Include="Models\Echipa.cs" />
     <Compile Include="Models\Evaluare.cs" />
     <Compile Include="Models\Jurat.cs" />
