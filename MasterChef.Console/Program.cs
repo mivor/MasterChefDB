@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using MasterChefDb.Models;
 using MasterChefDb;
 using System.Data.Entity;
+using MasterChef.DAL.Concrete;
+using MasterChefDb.Business.Models;
 
 namespace MasterChef.App
 {
@@ -13,6 +15,15 @@ namespace MasterChef.App
     {
         static void Main(string[] args)
         {
+
+            var map = new DbMapper();
+
+            EchipaModel source = new EchipaModel();
+
+            Echipa result = new Echipa();
+
+
+
             //using (var context = new MasterChefDataContext())
             //{
             //    //Database.SetInitializer(new MasterChefInitializer());

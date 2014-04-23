@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterChef.Business", "Mast
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterChef.DAL", "MasterChef.DAL\MasterChef.DAL.csproj", "{00DD2825-E6A8-4C14-A212-39FBC99273F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterChef.Tests", "MasterChef.Tests\MasterChef.Tests.csproj", "{375480A3-2351-4C1E-9267-677E87E23238}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{00DD2825-E6A8-4C14-A212-39FBC99273F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00DD2825-E6A8-4C14-A212-39FBC99273F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00DD2825-E6A8-4C14-A212-39FBC99273F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{375480A3-2351-4C1E-9267-677E87E23238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{375480A3-2351-4C1E-9267-677E87E23238}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{375480A3-2351-4C1E-9267-677E87E23238}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{375480A3-2351-4C1E-9267-677E87E23238}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
