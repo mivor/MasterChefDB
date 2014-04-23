@@ -7,7 +7,6 @@ namespace MasterChefDb
         public EchipaMapping()
         {
             ToTable("Echipe");
-            Ignore(x => x.Chef);
         }
     }
 }

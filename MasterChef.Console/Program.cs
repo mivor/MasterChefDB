@@ -17,6 +17,7 @@ namespace MasterChef.App
                 Database.SetInitializer(new MasterChefInitializer());
 
                 var chef_A = new Chef { Name = "Ramsy", Specializare = "Marine", Stele = 5 };
+                context.Persoane.Add(chef_A);
                 context.SaveChanges();
                 var echipa_A = new Echipa("Hey!");
                 echipa_A.AddConcurent(chef_A);

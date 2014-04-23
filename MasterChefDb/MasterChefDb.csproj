@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mappings\ChefMappings.cs" />
     <Compile Include="Mappings\ConcurentMapping.cs" />
     <Compile Include="Mappings\EchipaMapping.cs" />
     <Compile Include="Mappings\PersoaneMapping.cs" />

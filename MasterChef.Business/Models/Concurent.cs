@@ -8,8 +8,6 @@ namespace MasterChefDb
 {
     public class Concurent : Persoana
     {
-        // navigation 
-        //public virtual int? EchipaId { get; set; }
         public virtual Echipa Echipa { get; set; }
     }
 }
