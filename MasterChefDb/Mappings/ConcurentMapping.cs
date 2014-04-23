@@ -6,6 +6,7 @@ namespace MasterChefDb
     {
         public ConcurentMapping()
         {
+            ToTable("Concurenti");
             HasOptional(x => x.Echipa).WithMany(x => x.Concurenti)
                                       .WillCascadeOnDelete(false);
         }

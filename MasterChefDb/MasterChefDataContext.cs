@@ -18,9 +18,10 @@ namespace MasterChefDb
             modelBuilder.Configurations.Add(new PersoaneMapping());
             modelBuilder.Configurations.Add(new ConcurentMapping());
             modelBuilder.Configurations.Add(new ChefMappings());
+            modelBuilder.Configurations.Add(new ConcursMapping());
+
 
             modelBuilder.Entity<Echipa>().ToTable("Echipe");
-            modelBuilder.Entity<Concurent>().ToTable("Concurenti");
             modelBuilder.Entity<Jurat>().ToTable("Jurati");
             modelBuilder.Entity<Evaluare>().ToTable("Evaluari");
         }

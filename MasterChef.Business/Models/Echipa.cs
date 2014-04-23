@@ -16,7 +16,7 @@ namespace MasterChefDb
 
         public decimal MedieEchipa
         { 
-            get { return Evaluari.Sum( e => e.Nota); } 
+            get { return Evaluari.Sum( e => e.Nota); }
             private set {}
         }
 
@@ -30,7 +30,6 @@ namespace MasterChefDb
         {
             Nume = nume;
         }
-
 
         public void AddConcurent(Concurent concurent)
         {
