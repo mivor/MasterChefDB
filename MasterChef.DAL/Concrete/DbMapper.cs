@@ -12,10 +12,10 @@ namespace MasterChef.DAL.Concrete
 {
     public class DbMapper
     {
-        // dest - source
+        // TDest - TSource
         private List<Tuple<Type, Type>> types = new List<Tuple<Type, Type>>();
 
-        // problemType - baseType: count
+        // BaseType-ChildType: value
         private Dictionary<Tuple<Type, Type>, object> conflicts = new Dictionary<Tuple<Type, Type>, object>();
 
         public void Map<TSource, TResult>()
@@ -31,26 +31,25 @@ namespace MasterChef.DAL.Concrete
         public TResult Get<TResult, TSource>(TSource source) where TResult : new()
         {
             var result = new TResult();
-            
+            SetConflicting<TSource>(result);
 
-            foreach (var fromProp in typeof(TSource).GetProperties())
+            foreach (var toProp in typeof(TResult).GetProperties())
             {
-                var toProp = typeof(TResult).GetProperty(fromProp.Name);
+                var fromProp = typeof(TSource).GetProperty(toProp.Name);
 
-                if (toProp == null) continue;
+                if (fromProp == null) continue;
 
                 object value;
+                KeyValuePair<Tuple<Type, Type>, object> conflict;
                 var toType = toProp.PropertyType;
                 var fromType = fromProp.PropertyType;
                 
-                var conflictChild = conflicts.SingleOrDefault(x => x.Key.Item2 == typeof(TSource) && x.Key.Item1 == fromType);
-
-                if (conflictChild.Value != null)
-                    value = conflictChild.Value;
-
+                if (CheckConflict<TSource>(fromType, out conflict))
+                    value = conflict.Value;
+                
                 else if (IsClass(toType))
                     value = Get(toType, fromType, fromProp.GetValue(source));
-
+                
                 else if (IsCollection(toType) && fromProp.GetValue(source) != null)
                     value = CreateCollection(toType, fromProp, source);
 
@@ -95,18 +94,19 @@ namespace MasterChef.DAL.Concrete
             return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ICollection<>);
         }
 
-        private bool SetConflicting<TBase>()
+        private void SetConflicting<TBase>(object value)
         {
             var conflictBase = conflicts.SingleOrDefault(x => x.Key.Item1 == typeof(TBase));
             if (conflictBase.Key != null && conflictBase.Value == null)
             {
-                conflicts[conflictBase.Key] = result;
+                conflicts[conflictBase.Key] = value;
             }
         }
 
-        private bool GetConflicting()
+        private bool CheckConflict<TChild>(Type TConflicting, out KeyValuePair<Tuple<Type, Type>, object> conflict)
         {
-
+            conflict = conflicts.SingleOrDefault(x => x.Key.Item2 == typeof(TChild) && x.Key.Item1 == TConflicting);
+            return conflict.Value != null;
         }
     }
 }
