@@ -72,6 +72,22 @@ namespace MasterChef.Tests
         }
 
         [Fact]
+        public void SimpleCircularMapping()
+        {
+            var map = new DbMapper();
+            map.Map<EchipaModel, Echipa>();
+            map.Map<ChefModel, Chef>();
+            map.Conflict<EchipaModel, ChefModel>();
+
+            EchipaModel source = new EchipaModel { Id = 5 };
+            source.Chef = new ChefModel { Id = 2, Name = "Ion", Echipa = source };
+
+            Echipa result = map.Get<Echipa, EchipaModel>(source);
+
+            Assert.Equal(result.Chef.Echipa.Id, source.Id);
+        }
+
+        [Fact]
         public void CollectionReferenceMapping()
         {
             var map = new DbMapper();
