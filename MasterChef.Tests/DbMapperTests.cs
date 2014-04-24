@@ -7,6 +7,8 @@ using MasterChef.DAL.Concrete;
 using Xunit;
 using MasterChefDb.Models;
 using MasterChefDb.Business.Models;
+using System.Collections.ObjectModel;
+using MasterChef.Business.Models;
 
 namespace MasterChef.Tests
 {
@@ -53,6 +55,32 @@ namespace MasterChef.Tests
 
             Assert.Equal(source.Chef.Name, result.Chef.Name);
             Assert.Equal(source.Chef.Id, result.Chef.Id);
+        }
+
+        [Fact]
+        public void CollectionReferenceMapping()
+        {
+            var map = new DbMapper();
+            map.Map<EchipaModel, Echipa>();
+            var source = new ConcursModel();
+
+            source.Echipe = new Collection<EchipaModel>
+            {
+                new EchipaModel { Id = 5, Name = "A" }, 
+                new EchipaModel { Id = 6, Name = "B" }, 
+                new EchipaModel { Id = 3, Name = "C" }, 
+            };
+
+            Concurs result = map.Get<ConcursModel, Concurs>(source);
+
+            Assert.True(result.Echipe.All(x => x.GetType() == typeof(Echipa)));
+            Assert.True(result.Echipe.Count == 3);
+        }
+
+        [Fact]
+        public void CircularCollectionMapping()
+        {
+            Assert.False(true);
         }
     }
 }
