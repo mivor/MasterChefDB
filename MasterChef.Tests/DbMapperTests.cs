@@ -23,7 +23,7 @@ namespace MasterChef.Tests
 
             source.Id = 1;
 
-            Echipa result = map.Get<EchipaModel, Echipa>(source);
+            Echipa result = map.Get<Echipa, EchipaModel>(source);
 
             Assert.Equal(source.Id, result.Id);
         }
@@ -37,7 +37,8 @@ namespace MasterChef.Tests
 
             source.Name = "Chef";
 
-            Echipa result = map.Get<EchipaModel, Echipa>(source);
+            Echipa result = map.Get<Echipa, EchipaModel>(source);
+
 
             Assert.Equal(source.Name, result.Name);
         }
@@ -51,7 +52,7 @@ namespace MasterChef.Tests
 
             source.Chef = new ChefModel { Id = 2, Name = "Ion" };
 
-            Echipa result = map.Get<EchipaModel, Echipa>(source);
+            Echipa result = map.Get<Echipa, EchipaModel>(source);
 
             Assert.Equal(source.Chef.Name, result.Chef.Name);
             Assert.Equal(source.Chef.Id, result.Chef.Id);
@@ -71,7 +72,7 @@ namespace MasterChef.Tests
                 new EchipaModel { Id = 3, Name = "C" }, 
             };
 
-            Concurs result = map.Get<ConcursModel, Concurs>(source);
+            Concurs result = map.Get<Concurs, ConcursModel>(source);
 
             Assert.True(result.Echipe.All(x => x.GetType() == typeof(Echipa)));
             Assert.True(result.Echipe.Count == 3);
@@ -80,7 +81,24 @@ namespace MasterChef.Tests
         [Fact]
         public void CircularCollectionMapping()
         {
-            Assert.False(true);
+            var map = new DbMapper();
+            map.Map<ConcurentModel, Concurent>();
+            map.Map<EchipaModel, Echipa>();
+            map.Conflict<EchipaModel, ConcurentModel>();
+
+            var source = new EchipaModel();
+
+            source.Concurenti = new Collection<ConcurentModel>
+            {
+                new ConcurentModel { Id = 5, Name = "A", Echipa=source }, 
+                new ConcurentModel { Id = 6, Name = "B", Echipa=source }, 
+                new ConcurentModel { Id = 3, Name = "C", Echipa=source }, 
+            };
+
+            Echipa result = map.Get<Echipa, EchipaModel>(source);
+
+            Assert.True(result.Concurenti.All(x => x.GetType() == typeof(Concurent)));
+            Assert.True(result.Concurenti.Count == 3);
         }
     }
 }

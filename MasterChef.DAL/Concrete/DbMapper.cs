@@ -13,49 +13,100 @@ namespace MasterChef.DAL.Concrete
     public class DbMapper
     {
         // dest - source
-        private Dictionary<Type, Type> types = new Dictionary<Type, Type>();
-        
+        private List<Tuple<Type, Type>> types = new List<Tuple<Type, Type>>();
+
         // problemType - baseType: count
+        private Dictionary<Tuple<Type, Type>, object> conflicts = new Dictionary<Tuple<Type, Type>, object>();
 
         public void Map<TSource, TResult>()
         {
-            types.Add(typeof(TResult), typeof(TSource));
+            types.Add(Tuple.Create(typeof(TResult), typeof(TSource)));
         }
 
-        public TResult Get<TSource, TResult>(TSource source) where TResult : new()
+        public void Conflict<TBase, TChild>()
+        {
+            conflicts.Add(Tuple.Create(typeof(TBase), typeof(TChild)), null);
+        }
+
+        public TResult Get<TResult, TSource>(TSource source) where TResult : new()
         {
             var result = new TResult();
-            foreach (var prop in typeof(TSource).GetProperties())
+            
+
+            foreach (var fromProp in typeof(TSource).GetProperties())
             {
-                var propInfo = typeof(TResult).GetProperty(prop.Name);
-                if (propInfo != null)
-                {
-                    Type toType = propInfo.PropertyType;
-                    if (toType != typeof(string) && toType.IsClass && types.ContainsKey(toType))
-                    {
-                        object subType = toType.GetConstructor(new Type[] { }).Invoke(null);
-                        subType = typeof(DbMapper).GetMethod("Get").MakeGenericMethod(new Type[] { prop.PropertyType, toType }).Invoke(this, new object[] { prop.GetValue(source)});
-                        propInfo.SetValue(result, subType);
-                    }
-                    else if (toType.IsGenericType && toType.GetGenericTypeDefinition() == typeof(ICollection<>) && prop.GetValue(source) != null )
-                    {
-                        var toItemType = toType.GenericTypeArguments[0];
-                        var fromItemType = prop.PropertyType.GenericTypeArguments[0];
-                        var listType = typeof(List<>).MakeGenericType(toItemType);
-                        var subType = Activator.CreateInstance(listType);
-                        foreach (var item in (ICollection)prop.GetValue(source))
-                        {
-                            object collectionItem = toItemType.GetConstructor(new Type[] { }).Invoke(null);
-                            collectionItem = typeof(DbMapper).GetMethod("Get").MakeGenericMethod(new Type[] { fromItemType, toItemType }).Invoke(this, new object[] { item });
-                            subType.GetType().GetMethod("Add").Invoke(subType, new[] { collectionItem });
-                        }
-                        propInfo.SetValue(result, subType);
-                    }
-                    else
-                        propInfo.SetValue(result, prop.GetValue(source));
-                }
+                var toProp = typeof(TResult).GetProperty(fromProp.Name);
+
+                if (toProp == null) continue;
+
+                object value;
+                var toType = toProp.PropertyType;
+                var fromType = fromProp.PropertyType;
+                
+                var conflictChild = conflicts.SingleOrDefault(x => x.Key.Item2 == typeof(TSource) && x.Key.Item1 == fromType);
+
+                if (conflictChild.Value != null)
+                    value = conflictChild.Value;
+
+                else if (IsClass(toType))
+                    value = Get(toType, fromType, fromProp.GetValue(source));
+
+                else if (IsCollection(toType) && fromProp.GetValue(source) != null)
+                    value = CreateCollection(toType, fromProp, source);
+
+                else
+                    value = fromProp.GetValue(source);
+
+                toProp.SetValue(result, value);
             }
             return result;
+        }
+
+        private object Get(Type toType, Type fromType, object source)
+        {
+            object result = toType.GetConstructor(new Type[] { }).Invoke(null);
+            result = typeof(DbMapper).GetMethod("Get").MakeGenericMethod(new Type[] { toType, fromType }).Invoke(this, new object[] { source });
+            return result;
+        }
+
+        private object CreateCollection(Type toType, PropertyInfo sourceProp, object source)
+        {
+            var toItemType = toType.GenericTypeArguments[0];
+            var fromItemType = sourceProp.PropertyType.GenericTypeArguments[0];
+
+            var listType = typeof(List<>).MakeGenericType(toItemType);
+            var result = Activator.CreateInstance(listType);
+
+            foreach (var item in (ICollection)sourceProp.GetValue(source))
+            {
+                object collectionItem = Get(toItemType, fromItemType, item);
+                result.GetType().GetMethod("Add").Invoke(result, new[] { collectionItem });
+            }
+            return result;
+        }
+
+        private bool IsClass(Type type)
+        {
+            return type != typeof(string) && type.IsClass && types.Any(x => x.Item1 == type || x.Item2 == type);
+        }
+
+        private bool IsCollection(Type type)
+        {
+            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ICollection<>);
+        }
+
+        private bool SetConflicting<TBase>()
+        {
+            var conflictBase = conflicts.SingleOrDefault(x => x.Key.Item1 == typeof(TBase));
+            if (conflictBase.Key != null && conflictBase.Value == null)
+            {
+                conflicts[conflictBase.Key] = result;
+            }
+        }
+
+        private bool GetConflicting()
+        {
+
         }
     }
 }
