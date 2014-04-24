@@ -15,10 +15,22 @@ namespace MasterChef.Tests
     public class DALTests
     {
         [Fact]
-        public void SimpleValueMapping()
+        public void UnmappedType_Throws_ArgumentException()
         {
             var map = new DbMapper();
 
+            EchipaModel source = new EchipaModel();
+
+            source.Id = 1;
+
+            Assert.Throws<InvalidOperationException>(() => map.Get<Echipa, EchipaModel>(source));
+        }
+
+        [Fact]
+        public void SimpleValueMapping()
+        {
+            var map = new DbMapper();
+            map.Map<EchipaModel, Echipa>();
             EchipaModel source = new EchipaModel();
 
             source.Id = 1;
@@ -32,7 +44,7 @@ namespace MasterChef.Tests
         public void SimpleStringMapping()
         {
             var map = new DbMapper();
-
+            map.Map<EchipaModel, Echipa>();
             EchipaModel source = new EchipaModel();
 
             source.Name = "Chef";
@@ -47,6 +59,7 @@ namespace MasterChef.Tests
         public void SimpleReferenceMapping()
         {
             var map = new DbMapper();
+            map.Map<EchipaModel, Echipa>();
             map.Map<ChefModel, Chef>();
             EchipaModel source = new EchipaModel();
 
@@ -62,6 +75,7 @@ namespace MasterChef.Tests
         public void CollectionReferenceMapping()
         {
             var map = new DbMapper();
+            map.Map<ConcursModel, Concurs>();
             map.Map<EchipaModel, Echipa>();
             var source = new ConcursModel();
 

@@ -30,6 +30,12 @@ namespace MasterChef.DAL.Concrete
 
         public TResult Get<TResult, TSource>(TSource source) where TResult : new()
         {
+            if (!(IsMapped(typeof(TSource)) && IsMapped(typeof(TResult))))
+                throw new InvalidOperationException();
+
+            if (source == null)
+                return default(TResult);
+
             var result = new TResult();
             SetConflicting<TSource>(result);
 
@@ -84,9 +90,14 @@ namespace MasterChef.DAL.Concrete
             return result;
         }
 
+        private bool IsMapped(Type type)
+        {
+            return types.Any(x => x.Item1 == type || x.Item2 == type);
+        }
+
         private bool IsClass(Type type)
         {
-            return type != typeof(string) && type.IsClass && types.Any(x => x.Item1 == type || x.Item2 == type);
+            return type != typeof(string) && type.IsClass && IsMapped(type);
         }
 
         private bool IsCollection(Type type)
